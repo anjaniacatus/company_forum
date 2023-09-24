@@ -5,7 +5,10 @@
     <h2 class="card-title mb-4"> Poser une nouvelle question </h2>
     <form method="POST" class="form-control">{% csrf_token %}
           {{ form|crispy }}
-        <button type="submit" class="save btn btn-secondary w-1/6 mt-2">Save</button>
+        <div class="flex space-x-2 mt-4">
+            <input type="submit" value="Save" class="btn btn-sm "/>
+            <a href="/" class="btn btn-sm "> Annuler </a>
+        </div>
     </form>
     </div>
 {% endblock %}

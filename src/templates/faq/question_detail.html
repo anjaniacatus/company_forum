@@ -3,7 +3,7 @@
 {% block content %}
 <article class="card w-96 w-full ">
   <div class="card-body">
-      <h2 class="card-title"> <a href="{% url 'question_detail' pk=question.pk %}">{{ question.title  }} </a></h2>
+      <h2 class="card-title">  {{ question.title  }} </h2>
       <ul class="text-sm text-gray-500">
           <li> publiée le :  {{ question.created_date }} </li>
           <li> résolue le :  {{ question.resolved_date  }} </li>

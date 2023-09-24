@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+<div class="w-full max-w-7xl mx-auto px-4 mt-8">
+ 
+{% if form.errors %} 
+    <p> Your username and password didn't match. Please try agein </p>
+{% endif %}
+    <form method="post" action="{% url 'login' %}">
+        {% csrf_token %}
+        <div class="card shadow border-rounded p-8"> 
+            <tr>
+                <td class=rounded-lg""> {{ form.username.label_tag}} </td>
+                <td> {{ form.username }} </td>
+            </tr>
+            <tr class="mt-4">
+                <td> {{ form.password.label_tag }} </td>
+                <td> {{ form.password}} </td> 
+            </tr>
+
+        </div>
+
+        <div class="flex space-x-2 mt-4">
+            <input type="submit" value="login" class="btn btn-sm "/>
+            <a href="/" class="btn btn-sm "> Annuler </a>
+        </div>
+
+
+        <input type="hidden" name="next" value="{{ next }}"
+    </form>
+</div>
+
+{% endblock %}

@@ -25,7 +25,7 @@ SECRET_KEY = "django-insecure-^8#yuu#dfu-!gg=oul4ad$pe42tm+k#&i0o4yuywhu!2sj6!8d
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["127.0.0.1"]
 
 
 # Application definition
@@ -39,7 +39,7 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "fontawesomefree",
     "faq",
-    "crispy_forms",  # new
+    "crispy_forms",
     "crispy_tailwind",
 ]
 
@@ -112,7 +112,8 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = "en-us"
 
-TIME_ZONE = "UTC"
+IME_ZONE = "Indian/Antananarivo"
+
 
 USE_I18N = True
 
@@ -131,3 +132,4 @@ STATIC_ROOT = BASE_DIR.parent / "local-cdn" / "static"
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+LOGIN_REDIRECT_URL = "/"

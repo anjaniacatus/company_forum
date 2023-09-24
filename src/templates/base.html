@@ -36,14 +36,14 @@
                     <i class="fa-solid fa-filter"></i>
                 </button>
 
-                <button class="btn btn-ghost btn-circle">
+                <a href="{% url  'logout' %}" class="btn btn-ghost btn-circle">
                    <i class="fas fa-sign-out"></i>
-                </button>
+                </a>
             {% else %}
               {% block head %} {%endblock%} 
-               <button class="btn btn-ghost btn-circle">
+              <a href="{% url 'login' %}" class="btn btn-ghost btn-circle">
                    <i class="fas fa-sign-in"></i>
-                </button>
+                </a>
             {% endif %}
           </div>
           </div>
