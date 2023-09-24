@@ -5,15 +5,57 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block head_title %}Question Box Home{% endblock %}</title>
+    <title>{% block head_title %}FAQ{% endblock %}</title>
     {% include 'head/css.html' %}
 </head>
 <body>
-    <div>
-        <div class="navbar bg-base-200">
-            <a class="btn btn-ghost normal-case text-xl">FAQ </a>
-        </div>
-        {% block content %}{% endblock %}
-    </div>
+    <header>
+        <div class="navbar bg-base-100">
+          <div class="navbar-start">
+            <div class="dropdown">
+              <label tabindex="0" class="btn btn-ghost btn-circle">
+                  <i class="fa-solid fa-bars"></i>
+              </label>
+              <ul tabindex="0" class="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
+                <li><a href="/">Homepage</a></li>
+                <li><a href="/admin">Admin</a></li>
+                <li><a>A propos</a></li>
+              </ul>
+            </div>
+          </div>
+          <div class="navbar-center">
+            <a class="btn btn-ghost normal-case text-xl">Foire aux questions</a>
+          </div>
+          <div class="navbar-end">
+            <button class="btn btn-ghost btn-circle">
+                <i class="fa-regular fa-plus"></i>
+             </button>
+             <button class="btn btn-ghost btn-circle">
+                <i class="fas fa-search"></i>
+            </button>
+            <button class="btn btn-ghost btn-circle">
+                <i class="fa-solid fa-filter"></i>
+            </button>
+             <div class="join">
+                  <button class="join-item btn">«</button>
+                  <button class="join-item btn"> 1</button>
+                  <button class="join-item btn">»</button>
+              </div>
+
+            <button class="btn btn-ghost btn-circle">
+               <i class="fas fa-sign-in"></i>
+            </button>
+          </div>
+          </div>
+    </header>
+    {% block content %}{% endblock %}
+
+    <footer class="fixed bottom-0  z-20 w-full p-4 bg-white md:py-6">
+        <div class="footer-center p-6 w-full">
+         <span class="text-sm text-gray-500 sm:text-center">©
+            2023 <a href="" class="hover:underline">SakayDev™</a>. All Rights Reserved.
+        </span>
+       </div>
+    </footer>
 </body>
 </html>      
