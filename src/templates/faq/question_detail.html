@@ -11,8 +11,9 @@
 
     <p class="mt-1"> {{ question.answer  }}</p>
     <div class="card-actions justify-end mt-1">
-      <button class="btn btn-outline btn-secondary btn-xs"> Marquer comme résolue </button>
-       <a class="btn btn-outline btn-secondary btn-xs" href="{% url 'question_edit' pk=question.pk %}">
+        <a href="{% url 'question_resolve' pk=question.pk %}" class="btn
+                 btn-outline btn-secondary btn-xs"> Marquer comme résolue </a>
+        <a class="btn btn-outline btn-secondary btn-xs" href="{% url 'question_edit' pk=question.pk %}">
                 Modifier
             </a>
        <button class="btn btn-outline btn-xs  btn-secondary"> Archiver </button>

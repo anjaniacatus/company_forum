@@ -5,7 +5,11 @@ from .forms import QuestionForm
 
 
 def question_list(request):
-    questions = Question.objects.all().order_by("created_date")
+    questions = (
+        Question.objects.all()
+        .filter(resolved_date__isnull=False)
+        .order_by("created_date")
+    )
     paginator = Paginator(questions, 3)
     # page_number = request.GET.get("page")
     page_number = 1
@@ -49,3 +53,9 @@ def question_edit(request, pk):
     else:
         form = QuestionForm(instance=question)
     return render(request, "../templates/faq/question_edit.html", {"form": form})
+
+
+def question_resolve(request, pk):
+    question = get_object_or_404(Question, pk=pk)
+    question.resolve()
+    return redirect("question_detail", pk=pk)

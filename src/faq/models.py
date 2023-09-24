@@ -12,7 +12,7 @@ class Question(models.Model):
 
     def resolve(self):
         self.resolved_date = timezone.now()
-        self.save
+        self.save()
 
     def __str__(self):
         return self.title
