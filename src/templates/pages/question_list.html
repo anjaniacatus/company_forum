@@ -3,19 +3,18 @@
 {% for question in questions_per_page %}
  <article class="card w-96 w-full ">
   <div class="card-body">
-      <h2 class="card-title"> {{ question.title  }}</h2>
+      <div class="card-title">
+        <a class="link link-hover"
+            href="{% url 'question_detail' pk=question.pk %}">{{ question.title }}
+        </a>
+       </div>
       <ul class="text-sm text-gray-500">
           <li> on:  {{ question.created_date }} </li>
           <li> resolved on:  {{ question.resolved_date  }} </li>
       </ul>
 
     <p class="mt-1"> {{ question.answer  }}</p>
-    <div class="card-actions justify-end mt-1">
-      <button class="btn btn-primary"> Publier </button>
-       <button class="btn btn-primary"> Modifier </button>
-       <button class="btn btn-primary"> Archiver </button>
     </div>
-  </div>
   </article>
   <hr>
   {% endfor %}

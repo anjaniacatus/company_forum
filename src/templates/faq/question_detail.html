@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<article class="card w-96 w-full ">
+  <div class="card-body">
+      <h2 class="card-title"> <a href="{% url 'question_detail' pk=question.pk %}">{{ question.title  }} </a></h2>
+      <ul class="text-sm text-gray-500">
+          <li> on:  {{ question.created_date }} </li>
+          <li> resolved on:  {{ question.resolved_date  }} </li>
+      </ul>
+
+    <p class="mt-1"> {{ question.answer  }}</p>
+    <div class="card-actions justify-end mt-1">
+      <button class="btn btn-outline btn-secondary btn-xs"> Marquer comme résolue </button>
+       <a class="btn btn-outline btn-secondary btn-xs" href="{% url 'question_edit' pk=question.pk %}">
+                Modifier
+            </a>
+       <button class="btn btn-outline btn-xs  btn-secondary"> Archiver </button>
+    </div>
+  </div>
+  </article>
+{%endblock%}
+
