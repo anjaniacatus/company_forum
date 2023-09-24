@@ -1,9 +1,11 @@
 {% extends 'base.html' %}
-
+{% load crispy_forms_tags %}
 {% block content %}
-    <h2 class="card-title"> Poser une nouvelle question </h2>
+<div class="w-full max-w-7xl mx-auto px-4 mt-4">
+    <h2 class="card-title mb-4"> Poser une nouvelle question </h2>
     <form method="POST" class="form-control">{% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit" class="save btn btn-secondary w-1/6">Save</button>
+          {{ form|crispy }}
+        <button type="submit" class="save btn btn-secondary w-1/6 mt-2">Save</button>
     </form>
+    </div>
 {% endblock %}
