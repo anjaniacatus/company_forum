@@ -28,24 +28,23 @@
             <a class="btn btn-ghost normal-case text-xl">Foire aux questions</a>
           </div>
           <div class="navbar-end">
-              <a href="{%url 'question_new' %}" class="btn btn-ghost btn-circle">
-                <i class="fa-regular fa-plus"></i>
-             </a>
-             <button class="btn btn-ghost btn-circle">
-                <i class="fas fa-search"></i>
-            </button>
-            <button class="btn btn-ghost btn-circle">
-                <i class="fa-solid fa-filter"></i>
-            </button>
-             <div class="join">
-                  <button class="join-item btn">«</button>
-                  <button class="join-item btn"> 1</button>
-                  <button class="join-item btn">»</button>
-              </div>
+            {% if user.is_authenticated  %}
+                <a href="{%url 'question_new' %}" class="btn btn-ghost btn-circle">
+                    <i class="fa-regular fa-plus"></i>
+                 </a>
+                 <button class="btn btn-ghost btn-circle">
+                    <i class="fa-solid fa-filter"></i>
+                </button>
 
-            <button class="btn btn-ghost btn-circle">
-               <i class="fas fa-sign-in"></i>
-            </button>
+                <button class="btn btn-ghost btn-circle">
+                   <i class="fas fa-sign-out"></i>
+                </button>
+            {% else %}
+              {% block head %} {%endblock%} 
+               <button class="btn btn-ghost btn-circle">
+                   <i class="fas fa-sign-in"></i>
+                </button>
+            {% endif %}
           </div>
           </div>
     </header>

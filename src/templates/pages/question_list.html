@@ -1,22 +1,31 @@
 {% extends 'base.html' %}
+{%block head%}
+     <div class="join">
+        <button class="join-item btn">«</button>
+        <button class="join-item btn"> 1</button>
+        <button class="join-item btn">»</button>
+    </div>
+{% endblock %}
+
 {% block content %}
 {% for question in questions_per_page %}
- <article class="card w-96 w-full ">
-  <div class="card-body">
-      <div class="card-title">
-        <a class="link link-hover"
-            href="{% url 'question_detail' pk=question.pk %}">{{ question.title }}
-        </a>
-       </div>
-      <ul class="text-sm text-gray-500">
-          <li> on:  {{ question.created_date }} </li>
-          <li> resolved on:  {{ question.resolved_date  }} </li>
-      </ul>
+     <article class="card w-96 w-full ">
+      <div class="card-body">
+          <div class="card-title">
+            <a class="link link-hover"
+                href="{% url 'question_detail' pk=question.pk %}">{{ question.title }}
+            </a>
+           </div>
+           <ul class="text-sm text-gray-500">
+              <li> publiée le :  {{ question.created_date }} </li>
+              <li> résolue le :  {{ question.resolved_date  }} </li>
+              <li> auteur : {{ request.user.username }} - {{ request.user.lastname }}</li>
+          </ul>
 
-    <p class="mt-1"> {{ question.answer  }}</p>
-    </div>
-  </article>
-  <hr>
-  {% endfor %}
-  {% endblock %}
+        <p class="mt-1"> {{ question.answer  }}</p>
+        </div>
+      </article>
+      <hr>
+{% endfor %}
+{% endblock %}
 
