@@ -11,9 +11,9 @@ Ceci est une proposition d'application pour gérer une application de "FAQ"
 
 ## Démarrage du projet localement
 
-## Installation des paquets nécessaire 
+## Installation des paquets nécessaires
 
-### Backend
+### Frontend
 - Dans la racine du projet lancer : npm install
 
 ### Backend
