@@ -2,7 +2,7 @@
 {% load crispy_forms_tags %}
 {% block content %}
 <div class="w-full max-w-7xl mx-auto px-4 mt-4">
-    <h2 class="card-title mb-4"> Edition d'une question  </h2>
+    <h2 class="card-title mb-4"> Ajouter une nouvelle question  </h2>
     <form method="POST" class="form-control">{% csrf_token %}
           {{ form|crispy }}
         <div class="flex space-x-2 mt-4">

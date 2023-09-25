@@ -9,9 +9,14 @@ class Question(models.Model):
     answer = models.TextField()
     created_date = models.DateTimeField(default=timezone.now)
     resolved_date = models.DateTimeField(blank=True, null=True)
+    published_date = models.DateTimeField(blank=True, null=True)
 
     def resolve(self):
         self.resolved_date = timezone.now()
+        self.save()
+
+    def publish(self):
+        self.published_date = timezone.now()
         self.save()
 
     def __str__(self):

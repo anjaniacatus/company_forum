@@ -6,8 +6,10 @@ from .forms import QuestionForm, AnswerForm
 
 
 def question_list(request):
-    questions = Question.objects.filter(resolved_date__isnull=False).order_by(
-        "-created_date"
+    questions = (
+        Question.objects.filter(resolved_date__isnull=False)
+        .filter(published_date__isnull=False)
+        .order_by("-created_date")
     )
     # paginator = Paginator(questions, 3)
     # page_number = request.GET.get("page")
@@ -47,7 +49,6 @@ def answer_edit(request, pk):
         form = AnswerForm(request.POST, instance=question)
         if form.is_valid():
             question = form.save(commit=False)
-            question.author = request.user
             question.save()
             return redirect("question_detail", pk=question.pk)
     else:
@@ -60,9 +61,35 @@ def answer_edit(request, pk):
 
 
 @login_required
+def question_edit(request, pk):
+    question = get_object_or_404(Question, pk=pk)
+    if request.method == "POST":
+        form = QuestionForm(request.POST, instance=question)
+        if form.is_valid():
+            question = form.save(commit=False)
+            question.author = request.user
+            question.save()
+            return redirect("question_detail", pk=question.pk)
+    else:
+        form = QuestionForm(instance=question)
+    return render(
+        request,
+        "../templates/faq/question_edit.html",
+        {"form": form, "question": question},
+    )
+
+
+@login_required
 def question_resolve(request, pk):
     question = get_object_or_404(Question, pk=pk)
     question.resolve()
+    return redirect("question_detail", pk=pk)
+
+
+@login_required
+def question_publish(request, pk):
+    question = get_object_or_404(Question, pk=pk)
+    question.publish()
     return redirect("question_detail", pk=pk)
 
 

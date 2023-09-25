@@ -112,7 +112,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = "en-us"
 
-IME_ZONE = "Indian/Antananarivo"
+TIME_ZONE = "UTC"
 
 
 USE_I18N = True

@@ -6,7 +6,9 @@ urlpatterns = [
     path("question/<int:pk>", views.question_detail, name="question_detail"),
     path("question/<int:pk>/edit", views.answer_edit, name="answer_edit"),
     path("question/new/", views.question_new, name="question_new"),
+    path("guest_question/<int:pk>/edit", views.question_edit, name="question_edit"),
     path("question/<pk>/resolve/", views.question_resolve, name="question_resolve"),
+    path("question/<pk>/publish/", views.question_publish, name="question_publish"),
     path(
         "question/published",
         views.my_published_questions,

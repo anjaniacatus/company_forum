@@ -4,20 +4,25 @@
   <div class="card-body">
       <h2 class="card-title">  {{ question.title  }} </h2>
       <ul class="text-sm text-gray-500">
-          <li> publiée le :  {{ question.created_date }} </li>
+          <li> publiée le :  {{ question.published_date }} </li>
           <li> résolue le :  {{ question.resolved_date  }} </li>
           <li> Auteur :  {{ request.user.username  }} - {{ request.user.lastname }}</li>
       </ul>
 
     <p class="mt-1"> {{ question.answer  }}</p>
     <div class="card-actions justify-end mt-1">
-        {% if user.is_authenticated and user.is_superuser %}
-            {% if question.resolved_date == None %}
-                <a href="{% url 'question_resolve' pk=question.pk %}" class="btn btn-outline btn-secondary btn-xs"> Marquer comme résolue </a>
-                <a class="btn btn-outline btn-secondary btn-xs" href="{% url 'answer_edit' pk=question.pk %}"> Modifier</a>
-            {% endif %}
-            <button class="btn btn-outline btn-xs  btn-secondary"> Archiver </button>
-        {% endif %}
+        {% if user.is_authenticated  %}
+            {% if user.is_superuser %}
+                {% if question.resolved_date == None %}
+                    <a href="{% url 'question_resolve' pk=question.pk %}" class="btn btn-outline btn-secondary btn-xs"> Marquer comme résolue </a>
+                    <a class="btn btn-outline btn-secondary btn-xs" href="{% url 'answer_edit' pk=question.pk %}"> Modifier</a>
+                    <button class="btn btn-outline btn-xs  btn-secondary"> Archiver </button>
+                {% endif %}
+            {% elif question.author == user and question.published_date == None %}
+               <a href="{% url 'question_publish' pk=question.pk %}" class="btn btn-outline btn-secondary btn-xs"> Publier </a>
+               <a class="btn btn-outline btn-secondary btn-xs" href="{% url 'question_edit' pk=question.pk %}"> Modifier</a>
+           {% endif %}
+         {% endif %}
     </div>
   </div>
   </article>
