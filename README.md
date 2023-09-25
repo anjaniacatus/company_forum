@@ -1,6 +1,6 @@
 ## Foires aux questions
 
-Ceci est une proposition d'application pour gérer les questions qui taraudent un client concernant les services proposés par un entreprise
+Ceci est une proposition d'application pour gérer une application de "FAQ" 
 
 ## Fonctionnalités 
 
