@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% block title %} {{ title  }}{% endblock%}
 {%block head%}
      <div class="join">
         <button class="join-item btn">«</button>
@@ -17,7 +18,8 @@
             </a>
            </div>
            <ul class="text-sm text-gray-500">
-              <li> Publiée le :  {{ question.created_date }} </li>
+              <li> Créé le :  {{ question.created_date }} </li>
+              <li> Publié le :  {{ question.published_date }} </li>
               <li> Résolue le :  {{ question.resolved_date  }} </li>
               <li> Auteur : {{ question.author.username }} - {{ question.author.lastname }}</li>
           </ul>
@@ -25,7 +27,7 @@
         <p class="mt-1"> {{ question.answer  }}</p>
         </div>
       </article>
-      <hr>
+           <hr>
 {% endfor %}
 {% endblock %}
 

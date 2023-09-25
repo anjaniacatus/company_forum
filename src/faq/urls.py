@@ -15,6 +15,11 @@ urlpatterns = [
         name="my_published_questions",
     ),
     path("question/my_drafts", views.my_drafts, name="my_drafts"),
+    path(
+        "question/non_resolved_guest_questions",
+        views.non_resolved_guest_questions,
+        name="non_resolved_guest_questions",
+    ),
     path("question/all_resolved", views.question_list, name="all_resolved_questions"),
     path(
         "question/non_resolved",

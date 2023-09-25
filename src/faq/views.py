@@ -18,7 +18,7 @@ def question_list(request):
     return render(
         request,
         "../templates/pages/question_list.html",
-        {"questions": questions},
+        {"questions": questions, "title": "Home"},
     )
 
 
@@ -97,15 +97,23 @@ def question_publish(request, pk):
 def my_published_questions(request):
     questions = Question.objects.filter(author=request.user).order_by("-created_date")
     return render(
-        request, "../templates/pages/question_list.html", {"questions": questions}
+        request,
+        "../templates/pages/question_list.html",
+        {"questions": questions, "title": "Mes questions en attente de réponse"},
     )
 
 
 @login_required
 def my_drafts(request):
-    questions = Question.objects.filter(author=request.user).order_by("-created_date")
+    questions = (
+        Question.objects.filter(author=request.user)
+        .filter(published_date__isnull=True)
+        .order_by("-created_date")
+    )
     return render(
-        request, "../templates/pages/question_list.html", {"questions": questions}
+        request,
+        "../templates/pages/question_list.html",
+        {"questions": questions, "title": "My Drafts"},
     )
 
 
@@ -115,5 +123,22 @@ def non_resolved_questions(request):
         "-created_date"
     )
     return render(
-        request, "../templates/pages/question_list.html", {"questions": questions}
+        request,
+        "../templates/pages/question_list.html",
+        {"questions": questions, "title": "Questions à Traiter"},
+    )
+
+
+@login_required
+def non_resolved_guest_questions(request):
+    questions = (
+        Question.objects.filter(author=request.user)
+        .filter(published_date__isnull=False)
+        .filter(resolved_date__isnull=True)
+        .order_by("-created_date")
+    )
+    return render(
+        request,
+        "../templates/pages/question_list.html",
+        {"questions": questions, "title": "Questions en cours de Traitement"},
     )

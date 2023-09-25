@@ -22,10 +22,12 @@
                 <li><a href="/admin">Admin</a></li>
                 <li><a>A propos</a></li>
               </ul>
-              {% if user.is_authenticated %}
-              Hello, {{ user.username }}
-              {% endif %}
             </div>
+            {% if user.is_authenticated %}
+              Hello, {{ user.username }} : 
+            {% endif %} 
+            {%block title %}{%endblock%}
+
           </div>
           <div class="navbar-center">
             <a class="btn btn-ghost normal-case text-xl">Foire aux questions</a>
@@ -42,11 +44,13 @@
                     <i class="fa-solid fa-filter"></i>
                   </label>
                   <ul tabindex="0" class="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
-                      <li><a href="{% url 'my_published_questions' %}">Mes Questions</a></li>
+                      <li><a href="{% url 'all_resolved_questions' %}"> Toutes les questions Résolues</a></li>
                       <li><a href="{% url 'my_drafts' %}"> Drafts </a></li>
-                      <li><a href="{% url 'all_resolved_questions' %}"> Questions Résolues</a></li>
                       {% if user.is_superuser %}
                         <li><a href="{% url 'non_resolved_questions' %}"> Questions à Traiter </a></li>
+                      {% else %}
+                        <li><a href="{% url 'non_resolved_guest_questions'%}"> Mes Questions en attente </a></li>
+                        <li><a href="{% url 'my_published_questions' %}">Mes Questions</a></li>
                       {% endif %}
                   </ul>
                 </div>

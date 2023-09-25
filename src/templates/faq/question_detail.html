@@ -4,8 +4,9 @@
   <div class="card-body">
       <h2 class="card-title">  {{ question.title  }} </h2>
       <ul class="text-sm text-gray-500">
-          <li> publiée le :  {{ question.published_date }} </li>
-          <li> résolue le :  {{ question.resolved_date  }} </li>
+          <li> Crée le :  {{ question.created_date }} </li>
+          <li> Publiée le :  {{ question.published_date }} </li>
+          <li> Résolue le :  {{ question.resolved_date  }} </li>
           <li> Auteur :  {{ request.user.username  }} - {{ request.user.lastname }}</li>
       </ul>
 
@@ -14,8 +15,9 @@
         {% if user.is_authenticated  %}
             {% if user.is_superuser %}
                 {% if question.resolved_date == None %}
+
+                    <a class="btn btn-outline btn-secondary btn-xs" href="{% url 'answer_edit' pk=question.pk %}"> Répondre </a>
                     <a href="{% url 'question_resolve' pk=question.pk %}" class="btn btn-outline btn-secondary btn-xs"> Marquer comme résolue </a>
-                    <a class="btn btn-outline btn-secondary btn-xs" href="{% url 'answer_edit' pk=question.pk %}"> Modifier</a>
                     <button class="btn btn-outline btn-xs  btn-secondary"> Archiver </button>
                 {% endif %}
             {% elif question.author == user and question.published_date == None %}
