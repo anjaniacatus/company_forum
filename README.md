@@ -23,7 +23,7 @@ Ceci est une proposition d'application pour gérer une application de "FAQ"
 
 ### Démarrage du serveur 
   - Aller dans le répertoire src
-  - Lancer la commende : python3.11 manage.py runserver
+  - Lancer la commande : python3.11 manage.py runserver
   - Dans un autre terminal, dans la racine du projet lancer la commande :  npm run dev
 
 ## Déploiement
