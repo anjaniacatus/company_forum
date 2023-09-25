@@ -2,12 +2,12 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.core.paginator import Paginator
 from django.contrib.auth.decorators import login_required
 from .models import Question
-from .forms import QuestionForm
+from .forms import QuestionForm, AnswerForm
 
 
 def question_list(request):
     questions = Question.objects.filter(resolved_date__isnull=False).order_by(
-        "created_date"
+        "-created_date"
     )
     # paginator = Paginator(questions, 3)
     # page_number = request.GET.get("page")
@@ -41,17 +41,17 @@ def question_detail(request, pk):
 
 
 @login_required
-def question_edit(request, pk):
+def answer_edit(request, pk):
     question = get_object_or_404(Question, pk=pk)
     if request.method == "POST":
-        form = QuestionForm(request.POST, instance=question)
+        form = AnswerForm(request.POST, instance=question)
         if form.is_valid():
             question = form.save(commit=False)
             question.author = request.user
             question.save()
             return redirect("question_detail", pk=question.pk)
     else:
-        form = QuestionForm(instance=question)
+        form = AnswerForm(instance=question)
     return render(request, "../templates/faq/question_edit.html", {"form": form})
 
 
@@ -64,7 +64,7 @@ def question_resolve(request, pk):
 
 @login_required
 def my_published_questions(request):
-    questions = Question.objects.filter(author=request.user).order_by("created_date")
+    questions = Question.objects.filter(author=request.user).order_by("-created_date")
     return render(
         request, "../templates/pages/question_list.html", {"questions": questions}
     )
@@ -72,7 +72,7 @@ def my_published_questions(request):
 
 @login_required
 def my_drafts(request):
-    questions = Question.objects.filter(author=request.user).order_by("created_date")
+    questions = Question.objects.filter(author=request.user).order_by("-created_date")
     return render(
         request, "../templates/pages/question_list.html", {"questions": questions}
     )
@@ -81,7 +81,7 @@ def my_drafts(request):
 @login_required
 def non_resolved_questions(request):
     questions = Question.objects.filter(resolved_date__isnull=True).order_by(
-        "created_date"
+        "-created_date"
     )
     return render(
         request, "../templates/pages/question_list.html", {"questions": questions}

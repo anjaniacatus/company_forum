@@ -1,5 +1,4 @@
 {% extends 'base.html' %}
-
 {% block content %}
 <article class="card w-96 w-full ">
   <div class="card-body">
@@ -14,12 +13,8 @@
     <div class="card-actions justify-end mt-1">
         {% if user.is_authenticated and user.is_superuser %}
             {% if question.resolved_date == None %}
-                <a href="{% url 'question_resolve' pk=question.pk %}" class="btn
-                         btn-outline btn-secondary btn-xs"> Marquer comme résolue </a>
-                <a class="btn btn-outline btn-secondary btn-xs" href="{% url 'question_edit' pk=question.pk %}">
-                        Modifier
-                    </a>
-
+                <a href="{% url 'question_resolve' pk=question.pk %}" class="btn btn-outline btn-secondary btn-xs"> Marquer comme résolue </a>
+                <a class="btn btn-outline btn-secondary btn-xs" href="{% url 'answer_edit' pk=question.pk %}"> Modifier</a>
             {% endif %}
             <button class="btn btn-outline btn-xs  btn-secondary"> Archiver </button>
         {% endif %}
@@ -27,4 +22,3 @@
   </div>
   </article>
 {%endblock%}
-
