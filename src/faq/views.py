@@ -1,8 +1,20 @@
 from django.shortcuts import render, get_object_or_404, redirect
-from django.core.paginator import Paginator
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.contrib.auth.decorators import login_required
 from .models import Question
 from .forms import QuestionForm, AnswerForm
+
+
+def paginate(request, questions):
+    paginator = Paginator(questions, 3)
+    page = request.GET.get("page", 1)
+    try:
+        questions = paginator.page(page)
+    except PageNotAnInteger:
+        questions = paginator.page(1)
+    except EmptyPage:
+        questions = paginator.page(paginator.num_pages)
+    return questions
 
 
 def question_list(request):
@@ -11,14 +23,10 @@ def question_list(request):
         .filter(published_date__isnull=False)
         .order_by("-created_date")
     )
-    # paginator = Paginator(questions, 3)
-    # page_number = request.GET.get("page")
-    # page_number = 1
-    # questions_per_page = paginator.get_page(page_number)
     return render(
         request,
         "../templates/pages/question_list.html",
-        {"questions": questions, "title": "Home"},
+        {"questions": paginate(request, questions), "title": "Home"},
     )
 
 
@@ -99,7 +107,10 @@ def my_published_questions(request):
     return render(
         request,
         "../templates/pages/question_list.html",
-        {"questions": questions, "title": "Mes questions en attente de réponse"},
+        {
+            "questions": paginate(request, questions),
+            "title": "Mes questions en attente de réponse",
+        },
     )
 
 
@@ -113,7 +124,7 @@ def my_drafts(request):
     return render(
         request,
         "../templates/pages/question_list.html",
-        {"questions": questions, "title": "My Drafts"},
+        {"questions": paginate(request, questions), "title": "My Drafts"},
     )
 
 
@@ -125,7 +136,7 @@ def non_resolved_questions(request):
     return render(
         request,
         "../templates/pages/question_list.html",
-        {"questions": questions, "title": "Questions à Traiter"},
+        {"questions": paginate(request, questions), "title": "Questions à Traiter"},
     )
 
 
@@ -140,5 +151,8 @@ def non_resolved_guest_questions(request):
     return render(
         request,
         "../templates/pages/question_list.html",
-        {"questions": questions, "title": "Questions en cours de Traitement"},
+        {
+            "questions": paginate(request, questions),
+            "title": "Questions en cours de Traitement",
+        },
     )
