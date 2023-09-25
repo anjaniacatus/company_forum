@@ -8,7 +8,7 @@
 {% endblock %}
 
 {% block content %}
-{% for question in questions_per_page %}
+{% for question in questions %}
      <article class="card w-96 w-full ">
       <div class="card-body">
           <div class="card-title">
@@ -17,9 +17,9 @@
             </a>
            </div>
            <ul class="text-sm text-gray-500">
-              <li> publiée le :  {{ question.created_date }} </li>
-              <li> résolue le :  {{ question.resolved_date  }} </li>
-              <li> auteur : {{ request.user.username }} - {{ request.user.lastname }}</li>
+              <li> Publiée le :  {{ question.created_date }} </li>
+              <li> Résolue le :  {{ question.resolved_date  }} </li>
+              <li> Auteur : {{ question.author.username }} - {{ question.author.lastname }}</li>
           </ul>
 
         <p class="mt-1"> {{ question.answer  }}</p>

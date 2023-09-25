@@ -22,6 +22,9 @@
                 <li><a href="/admin">Admin</a></li>
                 <li><a>A propos</a></li>
               </ul>
+              {% if user.is_authenticated %}
+              Hello, {{ user.username }}
+              {% endif %}
             </div>
           </div>
           <div class="navbar-center">
@@ -34,9 +37,18 @@
                 <a href="{%url 'question_new' %}" class="btn btn-ghost btn-circle">
                     <i class="fa-regular fa-plus"></i>
                  </a>
-                 <button class="btn btn-ghost btn-circle">
+                 <div class="dropdown dropdown-left">
+                  <label tabindex="0" class="btn btn-ghost btn-circle">
                     <i class="fa-solid fa-filter"></i>
-                </button>
+                  </label>
+                  <ul tabindex="0" class="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
+                      <li><a href="{% url 'my_published_questions' %}">Mes Questions</a></li>
+                      <li><a href="{% url 'my_drafts' %}"> Drafts </a></li>
+                      <li><a href="{% url 'all_resolved_questions' %}"> Questions Résolues</a></li>
+                      <li><a href="{% url 'non_resolved_questions' %}"> Questions à Valider </a></li>
+                  </ul>
+                </div>
+
 
                 <a href="{% url  'logout' %}" class="btn btn-ghost btn-circle">
                    <i class="fas fa-sign-out"></i>

@@ -6,19 +6,17 @@ from .forms import QuestionForm
 
 
 def question_list(request):
-    questions = (
-        Question.objects.all()
-        .filter(resolved_date__isnull=False)
-        .order_by("created_date")
+    questions = Question.objects.filter(resolved_date__isnull=False).order_by(
+        "created_date"
     )
-    paginator = Paginator(questions, 3)
+    # paginator = Paginator(questions, 3)
     # page_number = request.GET.get("page")
-    page_number = 1
-    questions_per_page = paginator.get_page(page_number)
+    # page_number = 1
+    # questions_per_page = paginator.get_page(page_number)
     return render(
         request,
         "../templates/pages/question_list.html",
-        {"questions_per_page": questions_per_page},
+        {"questions": questions},
     )
 
 
@@ -62,3 +60,29 @@ def question_resolve(request, pk):
     question = get_object_or_404(Question, pk=pk)
     question.resolve()
     return redirect("question_detail", pk=pk)
+
+
+@login_required
+def my_published_questions(request):
+    questions = Question.objects.filter(author=request.user).order_by("created_date")
+    return render(
+        request, "../templates/pages/question_list.html", {"questions": questions}
+    )
+
+
+@login_required
+def my_drafts(request):
+    questions = Question.objects.filter(author=request.user).order_by("created_date")
+    return render(
+        request, "../templates/pages/question_list.html", {"questions": questions}
+    )
+
+
+@login_required
+def non_resolved_questions(request):
+    questions = Question.objects.filter(resolved_date__isnull=True).order_by(
+        "created_date"
+    )
+    return render(
+        request, "../templates/pages/question_list.html", {"questions": questions}
+    )
