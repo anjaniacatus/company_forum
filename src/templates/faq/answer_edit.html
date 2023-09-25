@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+<div class="w-full max-w-7xl mx-auto px-4 mt-8">
+    <h2 class="card-title mb-4">  {{ question.title }} </h2>
+    <form method="POST" class="form-control">{% csrf_token %}
+          {{ form|crispy }}
+        <div class="flex space-x-2 mt-4">
+            <input type="submit" value="Save" class="btn btn-sm "/>
+            <a href="/" class="btn btn-sm "> Annuler </a>
+           <a href="{% url 'question_resolve' pk=question.pk %}" class="btn btn-sm"> Marquer comme résolue </a>
+
+        </div>
+    </form>
+    </div>
+{% endblock %}

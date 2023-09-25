@@ -45,7 +45,9 @@
                       <li><a href="{% url 'my_published_questions' %}">Mes Questions</a></li>
                       <li><a href="{% url 'my_drafts' %}"> Drafts </a></li>
                       <li><a href="{% url 'all_resolved_questions' %}"> Questions Résolues</a></li>
-                      <li><a href="{% url 'non_resolved_questions' %}"> Questions à Valider </a></li>
+                      {% if user.is_superuser %}
+                        <li><a href="{% url 'non_resolved_questions' %}"> Questions à Traiter </a></li>
+                      {% endif %}
                   </ul>
                 </div>
 

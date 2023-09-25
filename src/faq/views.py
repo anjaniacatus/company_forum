@@ -52,7 +52,11 @@ def answer_edit(request, pk):
             return redirect("question_detail", pk=question.pk)
     else:
         form = AnswerForm(instance=question)
-    return render(request, "../templates/faq/question_edit.html", {"form": form})
+    return render(
+        request,
+        "../templates/faq/answer_edit.html",
+        {"form": form, "question": question},
+    )
 
 
 @login_required
