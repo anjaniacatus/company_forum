@@ -28,6 +28,7 @@ urlpatterns = [
     path("", include("faq.urls")),
     path("accounts/login/", LoginView.as_view(), name="login"),
     path("accounts/logout/", LogoutView.as_view(next_page="/"), name="logout"),
+    path("accounts/register/", views.register, name="register"),
 ]
 
 if settings.DEBUG:

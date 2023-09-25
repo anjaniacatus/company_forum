@@ -3,12 +3,16 @@
 {% block content %}
 <div class="w-full max-w-7xl mx-auto px-4 mt-8">
     <h2 class="card-title mb-4">  {{ question.title }} </h2>
-    <form method="POST" class="form-control">{% csrf_token %}
-          {{ form|crispy }}
-        <div class="flex space-x-2 mt-4">
-            <input type="submit" value="Save" class="btn btn-sm "/>
-            <a href="/" class="btn btn-sm "> Annuler </a>
-        </div>
-    </form>
-    </div>
+      <hr>
+        <br>
+        <form method="POST">
+            {% csrf_token %}
+            {{ form|crispy}}                    
+            <br>
+           <div class="flex space-x-2 mt-4">
+             <input type="submit" value="Save" class="btn btn-sm "/>
+             <a href="/" class="btn btn-sm "> Annuler </a>
+          </div>
+        </form>
+</div>
 {% endblock %}
