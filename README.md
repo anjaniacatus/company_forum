@@ -25,6 +25,7 @@ Ceci est une proposition d'application pour gérer une application de "FAQ"
  - Le projet utilse PostgresSQL
  - Avant de lancer la migration, il faut d'abord créer la BDD localement selon le nom configué dans la variable défini dans le fichier settings.py
  - Une fois la base créé, aller dans le répertoire src/QuestionBox/ puis lancer la commande : python manage.py migrate
+ - Créer un superutilisateur pour accéder à l'interface admin par défaut de Django
 
 ### Démarrage du serveur 
   - Aller dans le répertoire src
