@@ -4,6 +4,10 @@ from django.contrib.auth.decorators import login_required
 from .models import Question
 from .forms import QuestionForm, AnswerForm
 
+import logging
+
+logger = logging.getLogger(__name__)
+
 
 def paginate(request, questions):
     paginator = Paginator(questions, 3)
@@ -14,6 +18,9 @@ def paginate(request, questions):
         questions = paginator.page(1)
     except EmptyPage:
         questions = paginator.page(paginator.num_pages)
+    logger.debug
+
+    print(questions)
     return questions
 
 
@@ -103,7 +110,11 @@ def question_publish(request, pk):
 
 @login_required
 def my_published_questions(request):
-    questions = Question.objects.filter(author=request.user).order_by("-created_date")
+    questions = (
+        Question.objects.filter(author=request.user)
+        .filter(published_date__isnull=False)
+        .order_by("-created_date")
+    )
     return render(
         request,
         "../templates/pages/question_list.html",
