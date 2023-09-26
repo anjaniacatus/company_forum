@@ -28,7 +28,7 @@ def question_list(request):
     questions = (
         Question.objects.filter(resolved_date__isnull=False)
         .filter(published_date__isnull=False)
-        .order_by("-created_date")
+        .order_by("-created_at")
     )
     return render(
         request,
@@ -113,7 +113,7 @@ def my_published_questions(request):
     questions = (
         Question.objects.filter(author=request.user)
         .filter(published_date__isnull=False)
-        .order_by("-created_date")
+        .order_by("-created_at")
     )
     return render(
         request,
@@ -130,7 +130,7 @@ def my_drafts(request):
     questions = (
         Question.objects.filter(author=request.user)
         .filter(published_date__isnull=True)
-        .order_by("-created_date")
+        .order_by("-created_at")
     )
     return render(
         request,
@@ -144,7 +144,7 @@ def non_resolved_questions(request):
     questions = (
         Question.objects.filter(resolved_date__isnull=True)
         .filter(published_date__isnull=False)
-        .order_by("-created_date")
+        .order_by("-created_at")
     )
     return render(
         request,
@@ -159,7 +159,7 @@ def non_resolved_guest_questions(request):
         Question.objects.filter(author=request.user)
         .filter(published_date__isnull=False)
         .filter(resolved_date__isnull=True)
-        .order_by("-created_date")
+        .order_by("-created_at")
     )
     return render(
         request,

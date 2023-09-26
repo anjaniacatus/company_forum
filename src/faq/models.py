@@ -7,7 +7,9 @@ class Question(models.Model):
     author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     title = models.TextField()
     answer = models.TextField()
-    created_date = models.DateTimeField(default=timezone.now)
+    created_at = models.DateTimeField(default=timezone.now)
+    updated_at = models.DateTimeField(default=timezone.now)
+
     resolved_date = models.DateTimeField(blank=True, null=True)
     published_date = models.DateTimeField(blank=True, null=True)
 
