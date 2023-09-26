@@ -23,22 +23,26 @@
                 <li><a>A propos</a></li>
               </ul>
             </div>
-            {% if user.is_authenticated %}
-              Hello, {{ user.username }} : 
-            {% endif %} 
-            {%block title %}{%endblock%}
 
+            {%block title %}{%endblock%}
+            
           </div>
           <div class="navbar-center">
             <a class="btn btn-ghost normal-case text-xl">Foire aux questions</a>
           </div>
           <div class="navbar-end">
+            {% if user.is_authenticated %}
+               Hello, {{ user.username }}  
+              {%  if user.is_superuser %}  (admin) {% endif %}
+            {% endif %} 
 
-                 {% block head %} {%endblock%} 
+            {% block head %} {%endblock%} 
             {% if user.is_authenticated  %}
-                <a href="{%url 'question_new' %}" class="btn btn-ghost btn-circle">
-                    <i class="fa-regular fa-plus"></i>
-                 </a>
+                 {% if user.is_superuser == False %}
+                    <a href="{%url 'question_new' %}" class="btn btn-ghost btn-circle">
+                        <i class="fa-regular fa-plus"></i>
+                    </a>
+                 {% endif %}
                  <div class="dropdown dropdown-left">
                   <label tabindex="0" class="btn btn-ghost btn-circle">
                     <i class="fa-solid fa-filter"></i>

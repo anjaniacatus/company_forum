@@ -141,8 +141,10 @@ def my_drafts(request):
 
 @login_required
 def non_resolved_questions(request):
-    questions = Question.objects.filter(resolved_date__isnull=True).order_by(
-        "-created_date"
+    questions = (
+        Question.objects.filter(resolved_date__isnull=True)
+        .filter(published_date__isnull=False)
+        .order_by("-created_date")
     )
     return render(
         request,
