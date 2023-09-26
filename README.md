@@ -27,6 +27,17 @@ Ceci est une proposition d'application pour gérer une application de "FAQ"
  - Une fois la base créé, aller dans le répertoire src/QuestionBox/ puis lancer la commande : python manage.py migrate
  - Créer un superutilisateur pour accéder à l'interface admin par défaut de Django
 
+### Données de Test
+
+   On utilise Factory-boy et  faker pour peupler la BDD de test localement.
+
+   ex: pour générer des questions avec des réponses par défaut,  dans le terminal lancer le module shell de Django faire la commande suivante :
+   
+      from faq.factory import ResolvedQuestionFactory
+      ResolvedQuestionFactory.create_batch(42) 
+
+   Ce sera pareil pour les autres classes
+
 ### Démarrage du serveur 
   - Aller dans le répertoire src
   - Lancer la commande : python3.11 manage.py runserver
