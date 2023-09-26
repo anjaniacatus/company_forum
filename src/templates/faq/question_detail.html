@@ -12,19 +12,21 @@
 
     <p class="mt-1"> {{ question.answer  }}</p>
     <div class="card-actions justify-end mt-1">
-        {% if user.is_authenticated  %}
-            {% if user.is_superuser %}
-                {% if question.resolved_date == None %}
-
-                    <a class="btn btn-outline btn-secondary btn-xs" href="{% url 'answer_edit' pk=question.pk %}"> Répondre </a>
-                    <a href="{% url 'question_resolve' pk=question.pk %}" class="btn btn-outline btn-secondary btn-xs"> Marquer comme résolue </a>
-                    <button class="btn btn-outline btn-xs  btn-secondary"> Archiver </button>
-                {% endif %}
-            {% elif question.author == user and question.published_date == None %}
-               <a href="{% url 'question_publish' pk=question.pk %}" class="btn btn-outline btn-secondary btn-xs"> Publier </a>
-               <a class="btn btn-outline btn-secondary btn-xs" href="{% url 'question_edit' pk=question.pk %}"> Modifier</a>
-           {% endif %}
+        {% if user.is_authenticated  and user.is_superuser %}
+            {% if question.answer == None  %}
+                <a class="btn btn-outline btn-secondary btn-xs" href="{% url 'answer_edit' pk=question.pk %}"> Répondre </a>
+            {% else %}
+                <a class="btn btn-outline btn-secondary btn-xs" href="{% url 'answer_edit' pk=question.pk %}"> Modifier </a>
+            {% endif %}
+            {% if question.resolved_date == None %}
+                <a href="{% url 'question_resolve' pk=question.pk %}" class="btn btn-outline btn-secondary btn-xs"> Marquer comme résolue </a>
+            {% endif %}
+            <button class="btn btn-outline btn-xs  btn-secondary"> Archiver </button>
          {% endif %}
+        {% if question.author == user and question.published_date == None %}
+            <a href="{% url 'question_publish' pk=question.pk %}" class="btn btn-outline btn-secondary btn-xs"> Publier </a>
+            <a class="btn btn-outline btn-secondary btn-xs" href="{% url 'question_edit' pk=question.pk %}"> Modifier</a>
+        {% endif %}
     </div>
   </div>
   </article>

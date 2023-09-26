@@ -56,13 +56,11 @@
                                 Questions en attente </a></li>
                         <li><a href="{% url 'my_published_questions' %}">
                                 Questions publiées </a></li>
-                      {% endif %}
-                      
-                      <li><a href="{% url 'my_drafts' %}"> Drafts </a></li>
+
+                        <li><a href="{% url 'my_drafts' %}"> Drafts </a></li>
+                      {% endif %}              
                   </ul>
                 </div>
-
-
                 <a href="{% url  'logout' %}" class="btn btn-ghost btn-circle">
                    <i class="fas fa-sign-out"></i>
                 </a>
