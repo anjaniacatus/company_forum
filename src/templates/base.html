@@ -48,7 +48,7 @@
                     <i class="fa-solid fa-filter"></i>
                   </label>
                   <ul tabindex="0" class="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
-                      <li><a href="{% url 'all_resolved_questions' %}"> Toutes Questions Résolues</a></li>
+                      <li><a href="{% url 'all_resolved_questions' %}"> Toutes les questions résolues</a></li>
                       {% if user.is_superuser %}
                         <li><a href="{% url 'non_resolved_questions' %}"> Questions à Traiter </a></li>
                       {% else %}
