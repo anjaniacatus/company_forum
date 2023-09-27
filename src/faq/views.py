@@ -113,7 +113,7 @@ def my_published_questions(request):
         "../templates/pages/question_list.html",
         {
             "questions": paginate(request, questions),
-            "title": "Mes questions en attente de réponse",
+            "title": "Mes questions publiées sur le site",
         },
     )
 
@@ -128,7 +128,7 @@ def my_drafts(request):
     return render(
         request,
         "../templates/pages/question_list.html",
-        {"questions": paginate(request, questions), "title": "My Drafts"},
+        {"questions": paginate(request, questions), "title": "Brouillons"},
     )
 
 
@@ -159,6 +159,6 @@ def non_resolved_guest_questions(request):
         "../templates/pages/question_list.html",
         {
             "questions": paginate(request, questions),
-            "title": "Questions en cours de Traitement",
+            "title": "Mes questions en attente de réponse",
         },
     )
