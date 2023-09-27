@@ -5,20 +5,29 @@
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0 shrink-to-fit=no">
     <title>{% block head_title %}FAQ{% endblock %}</title>
     {% include 'head/css.html' %}
 </head>
-<body>
-    <header>
-        <div class="navbar bg-base-100">
+<body calss="bg-white antialiased">
+    <header class="flex flex-wrap  z-50">
+        <nav class="navbar bg-white shadow fixed z-40 w-full ">
           <div class="navbar-start">
             <div class="dropdown">
               <label tabindex="0" class="btn btn-ghost btn-circle">
                   <i class="fa-solid fa-bars"></i>
               </label>
+
               <ul tabindex="0" class="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
-                <li><a href="/">Homepage</a></li>
+                {% if user.is_authenticated %}
+                <li class="font-bold ml-2">
+                    Bonjour, {{ user.username }}  
+                    {%  if user.is_superuser %}  (admin) {% endif %}
+                   {% endif %} 
+                </li>
+
+
+                <li class="mt-3"><a href="/">Homepage</a></li>
                 <li><a href="/admin">Admin</a></li>
                 <li><a>A propos</a></li>
               </ul>
@@ -31,12 +40,8 @@
             <a class="btn btn-ghost normal-case text-xl">Foire aux questions</a>
           </div>
           <div class="navbar-end">
-            {% if user.is_authenticated %}
-               Hello, {{ user.username }}  
-              {%  if user.is_superuser %}  (admin) {% endif %}
-            {% endif %} 
-
-            {% block head %} {%endblock%} 
+           
+            {% block search %} {%endblock%} 
             {% if user.is_authenticated  %}
                  {% if user.is_superuser == False %}
                     <a href="{%url 'question_new' %}" class="btn btn-ghost btn-circle">
@@ -70,15 +75,18 @@
                 </a>
             {% endif %}
           </div>
-          </div>
+          </nav>
     </header>
-    {% block content %}{% endblock %}
+    <div class="z-0 mt-20">
+        {% block content %}{% endblock %}
+    </div>
 
     <footer class="fixed bottom-0  z-20 w-full p-4 bg-white md:py-6">
         <div class="footer-center p-6 w-full">
-         <span class="text-sm text-gray-500 sm:text-center">©
+         {%block pagination%} {%endblock%}
+         <div class="text-sm text-gray-500 sm:text-center mt-2">©
             2023 <a href="" class="hover:underline">SakayDev™</a>. All Rights Reserved.
-        </span>
+        </div>
        </div>
     </footer>
 </body>
