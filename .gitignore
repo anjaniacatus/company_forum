@@ -32,3 +32,6 @@ yarn-error.log*
 # Dependency directories
 node_modules/
 
+# ignore swap file from vim
+*.swp
+

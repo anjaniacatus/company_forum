@@ -4,7 +4,7 @@
   <div class="card-body">
       <h2 class="card-title">  {{ question.title  }} </h2>
       <ul class="text-sm text-gray-500">
-          <li> Crée le :  {{ question.created_date }} </li>
+          <li> Crée le :  {{ question.created_at }} </li>
           <li> Publiée le :  {{ question.published_date }} </li>
           <li> Résolue le :  {{ question.resolved_date  }} </li>
           <li> Auteur :  {{ request.user.username  }} - {{ request.user.lastname }}</li>
