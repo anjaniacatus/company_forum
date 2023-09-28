@@ -1,18 +1,20 @@
 {% extends 'base.html' %}
 {% load crispy_forms_tags %}
 {% block content %}
-<div class="w-full max-w-7xl mx-auto px-4 mt-8">
-    <h2 class="card-title mb-4">  {{ question.title }} </h2>
-      <hr>
-        <br>
-        <form method="POST">
-            {% csrf_token %}
-            {{ form|crispy}}                    
-            <br>
-           <div class="flex space-x-2 mt-4">
-             <input type="submit" value="Save" class="btn btn-sm "/>
-             <a href="/" class="btn btn-sm "> Annuler </a>
-          </div>
-        </form>
+ <div class="w-full">
+    <div class="card  inset-x-8">
+        <h2 class="font-bold py-2 ">  {{ question.title }} </h2>
+          <hr>
+           
+            <form method="POST" class=" mt-8">
+                {% csrf_token %}
+                {{ form|crispy}}                    
+                <br>
+               <div class="flex space-x-2 mt-4">
+                 <input type="submit" value="Save" class="btn btn-sm "/>
+                 <a href="/" class="btn btn-sm "> Annuler </a>
+              </div>
+            </form>
+    </div>
 </div>
 {% endblock %}

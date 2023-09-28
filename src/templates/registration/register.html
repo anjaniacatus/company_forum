@@ -9,10 +9,11 @@
             {% csrf_token %}
             {{ form|crispy}}                    
             <br>
-            <button class="btn btn-primary" type="submit">Register</button>
+            <p class="text-gray-500 text-sm mb-2">Si vous avez déjà un compte, authentifiez-vous </p>
+            <div class="space-x-2">
+               <button class="btn btn-primary" type="submit">Register</button>
+               <a class="btn "  href="/accounts/login"> Login </a>  
+            </div>
         </form>
-        <br><br>
-        <p class="text-gray-500 text-sm">Si vous avez déjà un compte, authentifiez-vous ici :  <a
-            href="/accounts/login" class="btn  btn-promary">LOGIN</a> </p>
     </div>
 {% endblock %}
