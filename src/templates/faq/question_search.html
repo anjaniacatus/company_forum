@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% block content %}
+  {% if  key_searched %}
+   <header class="mt-2 ml-4">
+        <h3 class="text-sm">  Résultat de la recherche contenant : {{ key_searched }} ... </h3>
+    </header>
+
+ {% endif %}
+    {% for question in questions %}
+         <article class="card w-96 w-full ">
+          <div class="card-body">
+              <div class="card-title">
+                <a class="link link-hover" href="{% url 'question_detail' pk=question.pk %}">{{ question.title }} </a>
+               </div>   
+            </div>
+          </article>
+          <hr>
+    {% endfor %}
+{% endblock %}

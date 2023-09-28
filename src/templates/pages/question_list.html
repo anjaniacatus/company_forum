@@ -1,5 +1,11 @@
 {% extends 'base.html' %}
 {% block title %} {{ title  }}{% endblock%}
+{% block search %}
+    <form class="form-control" method="POST" action="{% url 'question_search' %}">
+        {% csrf_token %}
+      <input type="text" placeholder="Search" name="key_searched" class="input input-bordered w-24 md:w-auto" />
+    </form>
+{% endblock %}
 {% block content %}
     {% for question in questions %}
          <article class="card w-96 w-full ">

@@ -1,6 +1,7 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.contrib.auth.decorators import login_required
+from django.db.models import Q
 from .models import Question
 from .forms import QuestionForm, AnswerForm
 
@@ -162,3 +163,23 @@ def non_resolved_guest_questions(request):
             "title": "Mes questions en attente de réponse",
         },
     )
+
+
+def question_search(request):
+    if request.method == "POST":
+        key_searched = request.POST["key_searched"]
+        questions = Question.objects.filter(
+            Q(title__contains=key_searched) | Q(answer__contains=key_searched)
+        )
+
+        return render(
+            request,
+            "../templates/faq/question_search.html",
+            {
+                "questions": questions,
+                "title": "Home",
+                "key_searched": key_searched,
+            },
+        )
+    else:
+        return redirect("question_list")
