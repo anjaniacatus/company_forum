@@ -11,7 +11,7 @@
 </head>
 <body class="bg-white antialiased">
     
-    <header class="flex flex-wrap">
+    <div class="flex flex-wrap">
         <nav class="navbar bg-white shadow fixed  w-full z-50">
           <div class="navbar-start">
             <div class="dropdown">
@@ -77,18 +77,19 @@
             {% endif %}
           </div>
           </nav>
-    </header>
+         <div class="mt-20">
+           {% block content %}{% endblock %}
+         </div>
+    </div>
     
 
-       
-        {% block content %}{% endblock %}
         
     
 
-    <footer class="fixed bottom-0  z-20 w-full p-4 bg-white md:py-6">
-        <div class="footer-center p-6 w-full">
+    <footer class="fixed bottom-0  z-20 w-full  bg-white md:py-6">
+        <div class="footer-center  w-full">
          {%block pagination%} {%endblock%}
-         <div class="text-sm text-gray-500 sm:text-center mt-2">©
+         <div class="text-sm text-gray-500 sm:text-center">©
             2023 <a href="" class="hover:underline">SakayDev™</a>. All Rights Reserved.
         </div>
        </div>
