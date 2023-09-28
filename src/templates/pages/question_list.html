@@ -1,27 +1,25 @@
 {% extends 'base.html' %}
 {% block title %} {{ title  }}{% endblock%}
 {% block content %}
-
-{% for question in questions %}
-     <article class="card w-96 w-full ">
-      <div class="card-body">
-          <div class="card-title">
-            <a class="link link-hover"
-                href="{% url 'question_detail' pk=question.pk %}">{{ question.title }}
-            </a>
-           </div>
-           <ul class="text-sm text-gray-500">
-              <li> Créé le :  {{ question.created_at }} </li>
-              <li> Publié le :  {{ question.published_date }} </li>
-              <li> Résolue le :  {{ question.resolved_date  }} </li>
-              <li> Auteur : {{ question.author.username }} - {{ question.author.lastname }}</li>
-          </ul>
-
-        <p class="mt-1"> {{ question.answer  }}</p>
-        </div>
-      </article>
-           <hr>
-{% endfor %}
+    {% for question in questions %}
+         <article class="card w-96 w-full ">
+          <div class="card-body">
+              <div class="card-title">
+                <a class="link link-hover"
+                    href="{% url 'question_detail' pk=question.pk %}">{{ question.title }}
+                </a>
+               </div>
+               <ul class="text-sm text-gray-500">
+                  <li> Créé le :  {{ question.created_at }} </li>
+                  <li> Publié le :  {{ question.published_date }} </li>
+                  <li> Résolue le :  {{ question.resolved_date  }} </li>
+                  <li> Auteur : {{ question.author.username }} - {{ question.author.lastname }}</li>
+              </ul>
+              <p class="mt-1"> {{ question.answer  }}</p>
+            </div>
+          </article>
+               <hr>
+    {% endfor %}
 {% endblock %}
 {%block pagination%}
    {% if questions.has_other_pages %}
