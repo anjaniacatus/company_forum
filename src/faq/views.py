@@ -22,7 +22,7 @@ def question_list(request):
     questions = (
         Question.objects.filter(resolved_date__isnull=False)
         .filter(published_date__isnull=False)
-        .order_by("-created_at")
+        .order_by("-resolved_date")
     )
     return render(
         request,
@@ -31,6 +31,7 @@ def question_list(request):
     )
 
 
+@login_required
 def question_new(request):
     if request.method == "POST":
         form = QuestionForm(request.POST)
