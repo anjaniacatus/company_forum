@@ -19,9 +19,12 @@ def paginate(request, questions):
     return questions
 
 
+def faq_about(request):
+    return render(request, "../templates/pages/about.html", {})
+
+
 def question_list(request):
     questions = question_filter.when_resolved_date_is_not_null()
-    print(questions)
     return render(
         request,
         "../templates/pages/question_list.html",
