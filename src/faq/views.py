@@ -4,6 +4,7 @@ from django.contrib.auth.decorators import login_required
 from django.db.models import Q
 from .models import Question
 from .forms import QuestionForm, AnswerForm
+from QuestionBox.helpers import question_filter
 
 
 def paginate(request, questions):
@@ -19,11 +20,8 @@ def paginate(request, questions):
 
 
 def question_list(request):
-    questions = (
-        Question.objects.filter(resolved_date__isnull=False)
-        .filter(published_date__isnull=False)
-        .order_by("-resolved_date")
-    )
+    questions = question_filter.when_resolved_date_is_not_null()
+    print(questions)
     return render(
         request,
         "../templates/pages/question_list.html",
@@ -105,11 +103,7 @@ def question_publish(request, pk):
 
 @login_required
 def my_published_questions(request):
-    questions = (
-        Question.objects.filter(author=request.user)
-        .filter(published_date__isnull=False)
-        .order_by("-created_at")
-    )
+    questions = question_filter.by_author_and_published_date_is_not_null(request)
     return render(
         request,
         "../templates/pages/question_list.html",
@@ -122,11 +116,7 @@ def my_published_questions(request):
 
 @login_required
 def my_drafts(request):
-    questions = (
-        Question.objects.filter(author=request.user)
-        .filter(published_date__isnull=True)
-        .order_by("-created_at")
-    )
+    questions = question_filter.by_author_and_published_date_is_null(request)
     return render(
         request,
         "../templates/pages/question_list.html",
@@ -137,9 +127,7 @@ def my_drafts(request):
 @login_required
 def non_resolved_questions(request):
     questions = (
-        Question.objects.filter(resolved_date__isnull=True)
-        .filter(published_date__isnull=False)
-        .order_by("-created_at")
+        question_filter.when_published_date_is_not_null_and_resolved_date_is__null()
     )
     return render(
         request,
@@ -150,12 +138,7 @@ def non_resolved_questions(request):
 
 @login_required
 def non_resolved_guest_questions(request):
-    questions = (
-        Question.objects.filter(author=request.user)
-        .filter(published_date__isnull=False)
-        .filter(resolved_date__isnull=True)
-        .order_by("-created_at")
-    )
+    questions = question_filter.by_author_and_resolved_date_is_null(request)
     return render(
         request,
         "../templates/pages/question_list.html",
@@ -168,18 +151,14 @@ def non_resolved_guest_questions(request):
 
 def question_search(request):
     if request.method == "POST":
-        key_searched = request.POST["key_searched"]
-        questions = Question.objects.filter(
-            Q(title__contains=key_searched) | Q(answer__contains=key_searched)
-        )
-
+        questions = question_filter.by_keywords(request)
         return render(
             request,
             "../templates/faq/question_search.html",
             {
                 "questions": questions,
                 "title": "Home",
-                "key_searched": key_searched,
+                "key_searched": request.POST["key_searched"],
             },
         )
     else:
