@@ -7,7 +7,7 @@ Ceci est une proposition d'application pour gérer une application de "FAQ"
 - Les visiteurs peuvent poser des questions
 - Le client peut visualiser la liste des questions et y répondre
 - Les visiteurs peuvent consulter la FAQ (qui est la liste des questions ayant obtenu une réponse)
-- Un api pour avoir la liste des questions 
+- Une api pour au moins récupérer la liste des questions 
 - L'application doit être réalisé avec le framework Django
 
 
@@ -48,8 +48,11 @@ Ceci est une proposition d'application pour gérer une application de "FAQ"
 
     ex: pour avoir la liste des questions dèja résolues :   
     pip install httpie (si httpie n'est pas encore installé)
-    HTTP -a {bob}:{mdpdebob} http://127.0.0.1:8000/faq/api/v1/questions
+    HTTP -a {bob}:{mdpdebob} http://127.0.0.1:8000/faq/api/v1/questions/
 
 ## Déploiement
 ## Test
+Les tests se trouve dans le dossier faq/tests/
+Utiliser la commande : python manage.py test pour exécuter tout les tests disponibles dans le code
+
 ## CI/CD
