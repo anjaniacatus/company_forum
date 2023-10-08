@@ -49,14 +49,31 @@ class DraftQuestionFactory(factory.django.DjangoModelFactory):
     answer = "ceci est un test"
 
 
-class QuestionFactory(factory.django.DjangoModelFactory):
+class PublishedQuestionFactory(factory.django.DjangoModelFactory):
+    class Meta:
+        model = Question
+
+    title = factory.Faker("sentence", nb_words=42)
+    published_date = fuzzy.FuzzyDateTime(datetime(2023, 10, 7, tzinfo=timezone.utc))
+    resolved_date = None
+    author = User.objects.get_or_create(username="Aina")[0]
+
+    @factory.LazyAttribute
+    def answer(self):
+        content = ""
+        for _ in range(0, 3):
+            content += "\n" + FAKE.paragraph(nb_sentences=32) + "\n"
+        return content
+
+
+class UnpublishedQuestionFactory(factory.django.DjangoModelFactory):
     class Meta:
         model = Question
 
     title = factory.Faker("sentence", nb_words=42)
     published_date = None
     resolved_date = None
-    author = User.objects.get_or_create(username="Neo")
+    author = User.objects.get_or_create(username="Aina")[0]
 
     @factory.LazyAttribute
     def answer(self):

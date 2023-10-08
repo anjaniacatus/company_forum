@@ -106,7 +106,7 @@ def question_publish(request, pk):
 
 @login_required
 def my_published_questions(request):
-    questions = question_filter.by_author_and_published_date_is_not_null(request)
+    questions = question_filter.by_author_and_published_date_is_not_null(request.user)
     return render(
         request,
         "../templates/pages/question_list.html",
@@ -119,7 +119,7 @@ def my_published_questions(request):
 
 @login_required
 def my_drafts(request):
-    questions = question_filter.by_author_and_published_date_is_null(request)
+    questions = question_filter.by_author_and_published_date_is_null(request.user)
     return render(
         request,
         "../templates/pages/question_list.html",
@@ -130,7 +130,7 @@ def my_drafts(request):
 @login_required
 def non_resolved_questions(request):
     questions = (
-        question_filter.when_published_date_is_not_null_and_resolved_date_is__null()
+        question_filter.when_published_date_is_not_null_and_resolved_date_is_null()
     )
     return render(
         request,
@@ -141,7 +141,7 @@ def non_resolved_questions(request):
 
 @login_required
 def non_resolved_guest_questions(request):
-    questions = question_filter.by_author_and_resolved_date_is_null(request)
+    questions = question_filter.by_author_and_resolved_date_is_null(request.user)
     return render(
         request,
         "../templates/pages/question_list.html",
@@ -154,7 +154,8 @@ def non_resolved_guest_questions(request):
 
 def question_search(request):
     if request.method == "POST":
-        questions = question_filter.by_keywords(request)
+        key_searched = request.POST["key_searched"]
+        questions = question_filter.by_keywords(key_searched)
         return render(
             request,
             "../templates/faq/question_search.html",
