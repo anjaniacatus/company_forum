@@ -48,7 +48,10 @@ Ceci est une proposition d'application pour gérer une application de "FAQ"
 
     ex: pour avoir la liste des questions dèja résolues :   
     pip install httpie (si httpie n'est pas encore installé)
-    HTTP -a {bob}:{mdpdebob} http://127.0.0.1:8000/faq/api/v1/questions/
+    HTTP -a {bob}:{mdpdebob} http://127.0.0.1:8000/faq/api/v1/questions 
+    
+    ex: pour passer des paramètres dans le endpoint
+    HTTP -a bob:{mdpdebob} http://127.0.0.1:8000/faq/api/v1/questions\?usename\=Aina
 
 ## Déploiement
 ## Test
