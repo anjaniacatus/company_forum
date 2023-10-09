@@ -20,19 +20,15 @@ from django.urls import path, include
 from rest_framework import routers
 
 from django.contrib.auth.views import LoginView, LogoutView
-from faq_api.views import QuestionViewSet
 
 
 from . import views
-
-router = routers.DefaultRouter()
-router.register(r"questions", QuestionViewSet)
 
 
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("", include("faq.urls")),
-    path("faq/api/v1/", include(router.urls)),
+    path("", include("faq_api.urls")),
     path("api-auth/", include("rest_framework.urls", namespace="rest_framework")),
     path("accounts/login/", LoginView.as_view(), name="login"),
     path("accounts/logout/", LogoutView.as_view(next_page="/"), name="logout"),
