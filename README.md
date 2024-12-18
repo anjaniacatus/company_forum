@@ -1,61 +1,65 @@
-## Foires aux questions
+[![fr](https://img.shields.io/badge/lang-fr-red.svg)](https://github.com/anjaniacatus/company_forum/blob/main/README.fr.md)
+[![en](https://img.shields.io/badge/lang-en-blue.svg)](https://github.com/anjaniacatus/compagny_forum/blob/main/README.md)
 
-Ceci est une proposition d'application pour gérer une application de "FAQ" 
+## Frequently asked questions
 
-## Fonctionnalités 
+This is an application proposal to allow a company to  manage and reply questions  from there customers 
 
-- Les visiteurs peuvent poser des questions
-- Le client peut visualiser la liste des questions et y répondre
-- Les visiteurs peuvent consulter la FAQ (qui est la liste des questions ayant obtenu une réponse)
-- Une api pour au moins récupérer la liste des questions 
-- L'application doit être réalisé avec le framework Django
+## Specifications
+
+- lambda visitors can view and search for replied questions
+- A company user can look and search for questions and replied to them
+- An authenticated user can ask new questions and follow up on them
+- An api is needed at least to retrieve all of the questions depending on his states (resolved, pending, ....) 
+- We have to use Django and DRF for the implementation
 
 
-## Démarrage du projet localement
+## Setting up the project locally
 
-## Installation des paquets nécessaires
+## Installation
+- git clone https://github.com/anjaniacatus/company_forum
+- cd company_forum
 
 ### Frontend
-- Dans la racine du projet lancer : npm install
+- In the project root launch  : npm install
 
 ### Backend
- - Dans la racine du projet , créer un 'virtual env' :  python3 -m venv venv
- - Activer le venv : source venv/bin/activate
- - Installer les paquets dans src/requirements.txt :   pip install -r src/requirements.txt
+ - in the root project , create a 'virtual env' :  python3 -m venv venv
+ - Activate it : source venv/bin/activate
+ - Install dependencies though  src/requirements.txt :   pip install -r src/requirements.txt
 
-### Base de données
- - Le projet utilse PostgresSQL
- - Avant de lancer la migration, il faut d'abord créer la BDD localement selon le nom configué dans la variable défini dans le fichier settings.py
- - Une fois la base créé, aller dans le répertoire src/QuestionBox/ puis lancer la commande : python manage.py migrate
- - Créer un superutilisateur pour accéder à l'interface admin par défaut de Django
+### Databases
+ - This app use PostgresSQL
+ - Before lunching migrations, Create a local database using the name configured in settings.py
+ - Migration : go to the src/QuestionBox/ then execute the  command : python manage.py migrate
+ - You have to create a superuser for the django admin
 
-### Données de Test
+### Test
 
-   On utilise Factory-boy et  faker pour peupler la BDD de test localement.
+   we use  Factory-boy and  faker for seeding data
 
-   ex: pour générer des questions avec des réponses par défaut,  dans le terminal lancer le module shell de Django faire la commande suivante :
+   ex: from  the Django Shell, execute the following command  to generate some  questions randomly :
    
       from faq.factory import ResolvedQuestionFactory
       ResolvedQuestionFactory.create_batch(42) 
 
-   Ce sera pareil pour les autres classes
+   You can use the same process for the other classes
 
-### Démarrage du serveur 
-  - Aller dans le répertoire src
-  - Lancer la commande : python3.11 manage.py runserver
-  - Dans un autre terminal, dans la racine du projet lancer la commande :  npm run dev
-  - Un Api est servi sur l'endpoint : {srv-url}/faq/api/v1/questions. on peut utiliser httpie pour tester la requête : 
+### Launch the server locally
+  - in the src directory execute : python3.11 manage.py runserver
+  - In the other terminal, inside the root project du projet execute :  npm run dev
+  - the api is served on this endpoint : {srv-url}/faq/api/v1/questions   
 
-    ex: pour avoir la liste des questions dèja résolues :   
-    pip install httpie (si httpie n'est pas encore installé)
+    eg: for testing the endpoint  
+    pip install httpie (if you want to use it , but curl also can work)
     HTTP -a {bob}:{mdpdebob} http://127.0.0.1:8000/faq/api/v1/questions 
     
-    ex: pour passer des paramètres dans le endpoint
+    eg: testing the endpoint with some filter
     HTTP -a bob:{mdpdebob} http://127.0.0.1:8000/faq/api/v1/questions\?usename\=Aina
 
-## Déploiement
+## Deployment
 ## Test
-Les tests se trouve dans le dossier faq/tests/
-Utiliser la commande : python manage.py test pour exécuter tout les tests disponibles dans le code
+tests are inside the faq/tests/ directory
+how to lunch the test locally  : python manage.py test 
 
 ## CI/CD
