@@ -1,4 +1,4 @@
-[![fr](https://img.shields.io/badge/lang-fr-red.svg)](https://github.com/anjaniacatus/company_forum/blob/main/README.fr.md)
+[![fr](https://img.shields.io/badge/lang-fr-red.svg)](https://github.com/anjaniacatus/compagny_forum/blob/main/README.fr.md)
 [![en](https://img.shields.io/badge/lang-en-blue.svg)](https://github.com/anjaniacatus/compagny_forum/blob/main/README.md)
 
 ## Frequently asked questions
